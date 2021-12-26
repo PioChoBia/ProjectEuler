@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ProjectEuler
 {
@@ -32,19 +33,82 @@ namespace ProjectEuler
                  The prime factors of 13195 are 5, 7, 13 and 29.
                  What is the largest prime factor of the number 600851475143 ?
             */
-            LargestPrimeFactor();
+            //LargestPrimeFactor();
+            LargestPrimeFactor1();
 
+        }
+
+        private static void LargestPrimeFactor1()
+        {
+            const ulong example = 600851475143;
+            ulong example1 = example;
+            ulong largest = 0;
+            List<ulong> prime = new List<ulong>();
+            bool isPrime;
+
+            for (ulong i = 3; i < (ulong)Math.Sqrt(example); i += 2)
+            {
+                isPrime = true;
+                for (ulong i1 = 3; i1 < i; i1 += 2)
+                {
+                    if (i % i1 == 0)
+                    {
+                        isPrime = false;
+                        break;
+                    }
+                }
+
+                if (isPrime & example1%i==0)
+                {                  
+                   if (i > largest) largest = i;
+                    while ( example1%i==0)
+                    {
+                        example1 = example1 / i;
+                        Console.WriteLine(i);
+                    }
+                }
+
+                if (example1 == 1) break;                                              
+            }
+
+            Console.WriteLine("the largest prime factor of the number " + example + "= " + largest);
         }
 
         private static void LargestPrimeFactor()
         {
-            const ulong example = 13195;//600851475143;
+            const ulong example = 600851475143;
             ulong largest = 0;
-            for (ulong i = 1; i < example; i=i+1)
+            List<ulong> prime = new List<ulong>();
+            bool isPrime;
+            ulong counter = 0;
+
+            //prime numbers are 2, 3 and futher calculated  
+            prime.Add(2);
+            prime.Add(3);
+            //I only need to check up to the square root(x) of the number(example)
+            //example = x*x
+            for (ulong i = 5; i < (ulong)Math.Sqrt(example); i+=2)
             {
-                if (example % i == 0 & i > largest) largest = i; 
+                isPrime = true;
+                for (ulong i1 = 3; i1 < i; i1+=2)
+                {
+                    if (i % i1 == 0) {
+                        isPrime = false;
+                        break; 
+                    }                     
+                }
+                if (isPrime) {
+                    counter++;
+                    Console.WriteLine(counter+" "+i);
+                    prime.Add(i); 
+                }
             }
-            Console.WriteLine("the largest prime factor of the number 600851475143= " + largest);
+
+            foreach (ulong item in prime)
+            {
+                if (example % item == 0) largest = item;                              
+            }
+            Console.WriteLine("the largest prime factor of the number " + example + "= " + largest);
         }
 
         private static void EvenFibinacciNumbers()
