@@ -34,9 +34,328 @@ namespace ProjectEuler
                  What is the largest prime factor of the number 600851475143 ?
             */
             //LargestPrimeFactor();
-            LargestPrimeFactor1();
+            //LargestPrimeFactor1();
+
+            /*
+                Largest palindrome product
+                A palindromic number reads the same both ways. 
+                The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.
+                Find the largest palindrome made from the product of two 3-digit numbers.  
+            */
+            //LargestPalindromeProduct();
+
+            /*
+                Smallest multiple  
+                2520 is the smallest number that can be divided by each of the numbers from 1 to 10 
+                without any remainder.
+                What is the smallest positive number that is evenly divisible by 
+                all of the numbers from 1 to 20?
+            */
+            //SmallestMultiple();
+
+            /*
+                Sum square difference           
+                Find the difference between the sum of the squares of the first one hundred natural 
+                numbers and the square of the sum.              
+            */
+            //SumSquadreDifference();
+
+            /*
+                10001st prime
+                By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that 
+                the 6th prime is 13.
+                What is the 10 001st prime number?
+            */
+            //TenThousendOnePrime();
+
+            /*
+                Largest product in a series
+                The four adjacent digits in the 1000-digit number that have the greatest product 
+                are 9 × 9 × 8 × 9 = 5832.
+                Find the thirteen adjacent digits in the 1000-digit number that have the greatest product.
+                What is the value of this product?
+            */
+            //LargestProductInASeries();
+
+            /*
+                Special Pythagorean triplet
+                A Pythagorean triplet is a set of three natural numbers, a < b < c, for which,
+                a2 + b2 = c2
+                For example, 3^2 + 4^2 = 9 + 16 = 25 = 5^2.
+                There exists exactly one Pythagorean triplet for which a + b + c = 1000.
+                Find the product abc.
+             */
+            //SpecialPythagoreanTriplet();
+
+
+            /*
+                Summation of primes 
+                The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
+                Find the sum of all the primes below two million.
+             */
+            //SummationOfPrimes();
+            SummationOfPrimes1();
+
+            //kończę na nr 10 bo jest zakaz publikacji rozwiązań w tym projekcie
+            /*
+            for (ulong i = 0; i <= 100; i++)
+            {
+                if (IsPrime(i))
+                {
+                    Console.WriteLine(i);
+                }
+            }
+            */
 
         }
+
+
+        public static bool IsPrime(ulong u1)
+        {        
+            if (u1 < 1) return false;//0, 1 is not prime
+            else if (u1 < 4) return true;//2, 3 is prime
+            
+            else if (u1 % 2 == 0) return false;//even numbers are not prime
+            else if (u1 < 9) return true;//5, 7 is prime
+            
+            else if (u1 % 3 == 0) return false;
+            else if (u1 % 5 == 0) return false;
+            else if (u1 % 7 == 0) return false;
+            else if (u1 <=100 ) return true;// 11,13,17,19,23,29,31,37,41,43,47
+                                            // 53,59,61,67,71,73,79,83,89,97 is prime
+            else if (u1 % 11 == 0) return false;
+            else if (u1 % 13 == 0) return false;
+            else if (u1 % 17 == 0) return false;
+            else if (u1 % 19 == 0) return false;
+            else if (u1 % 23 == 0) return false;
+            else if (u1 % 29 == 0) return false;
+            else if (u1 % 31 == 0) return false;
+            else if (u1 % 37 == 0) return false;
+            else if (u1 % 41 == 0) return false;
+            else if (u1 % 43 == 0) return false;
+            else if (u1 % 47 == 0) return false;
+            else if (u1 % 53 == 0) return false;
+            else if (u1 % 59 == 0) return false;
+            else if (u1 % 61 == 0) return false;
+            else if (u1 % 67 == 0) return false;
+            else if (u1 % 71 == 0) return false;
+            else if (u1 % 73 == 0) return false;
+            else if (u1 % 79 == 0) return false;
+            else if (u1 % 83 == 0) return false;
+            else if (u1 % 89 == 0) return false;
+            else if (u1 % 97 == 0) return false;
+
+            else for (ulong i = 101; i <u1 ; i=i+2)
+                {
+                    if (u1 % i == 0) return false;
+                }
+
+            return true;
+        }
+
+
+        private static void SummationOfPrimes1()
+        {
+            //I start form 2nd prime, 1st is 2
+            ulong sumation = 2;
+            ulong upperLimit = 2000000;
+
+            for (ulong i = 3; i <= upperLimit; i += 2)
+            {
+                if ( IsPrime(i) )
+                {
+                    sumation += i;
+                    Console.WriteLine("prime= " + i + " sumation= " + sumation);
+                };
+                ;
+            }
+        }
+
+        private static void SummationOfPrimes()
+        {
+            //I start form 2nd prime, 1st is 2
+            ulong sumation = 2;
+            ulong upperLimit = 2000000;            
+            bool isPrime = true;
+
+            for (ulong i = 3; i <= upperLimit; i+=2)           
+            {
+                isPrime = true;
+                for (ulong i1 = 3; i1 < i; i1 += 2)
+                {
+                    if (i % i1 == 0)
+                    {
+                        isPrime = false;
+                        break;
+                    }
+                }
+
+                if (isPrime)
+                {
+                    sumation += i;
+                    Console.WriteLine("prime= " + i + " sumation= "+sumation );
+                };
+                ;
+            }
+        }
+
+
+        private static void SpecialPythagoreanTriplet()
+        {
+            int a = 0, b = 0, c = 0;
+            for (int i = 1; i <999 ; i++)
+            {
+                for (int j = 1; j < 999; j++)
+                {
+                    for (int k = 1; k < 999; k++)
+                    {
+                        if (i * i + j * j == k * k & i+j+k==1000) 
+                        {
+                            a = i;
+                            b = j;
+                            c = k;
+                            Console.WriteLine("a= " + a + " b= " + b + " c= " + c);
+                            break;
+
+                        }
+                    }
+                }
+            }
+            Console.WriteLine("a= " + a + " b= " + b + " c= " + c);
+            Console.WriteLine("a*b*c= " + (a * b * c));
+
+
+        }
+
+
+        private static void LargestProductInASeries()
+        {
+            string oneThousendDigit=
+                "73167176531330624919225119674426574742355349194934"+
+                "96983520312774506326239578318016984801869478851843" +
+                "85861560789112949495459501737958331952853208805511" +
+                "12540698747158523863050715693290963295227443043557" +
+                "66896648950445244523161731856403098711121722383113" +
+                "62229893423380308135336276614282806444486645238749" +
+                "30358907296290491560440772390713810515859307960866" +
+                "70172427121883998797908792274921901699720888093776" +
+                "65727333001053367881220235421809751254540594752243" +
+                "52584907711670556013604839586446706324415722155397" +
+                "53697817977846174064955149290862569321978468622482" +
+                "83972241375657056057490261407972968652414535100474" +
+                "82166370484403199890008895243450658541227588666881" +
+                "16427171479924442928230863465674813919123162824586" +
+                "17866458359124566529476545682848912883142607690042" +
+                "24219022671055626321111109370544217506941658960408" +
+                "07198403850962455444362981230987879927244284909188" +
+                "84580156166097919133875499200524063689912560717606" +
+                "05886116467109405077541002256983155200055935729725" +
+                "71636269561882670428252483600823257530420752963450";
+            string s13 = "";
+            ulong multiplication = 0;
+            ulong largest = 0;
+
+            
+
+            for (int i = 0; i < 987; i++)
+            {
+                s13 = oneThousendDigit.Substring(i, 13);
+                multiplication = ulong.Parse(oneThousendDigit.Substring(i,1));
+                for (int j = 1; j < s13.Length; j++)
+                {
+                    multiplication *= ulong.Parse(s13.Substring(j,1));
+                }
+                if (multiplication > largest) largest = multiplication;
+            }
+
+            Console.WriteLine(oneThousendDigit.Length);
+            Console.WriteLine("value of the greatest product= " + largest);
+        }
+
+
+        private static void TenThousendOnePrime()
+        {
+            int numberPrime = 10001;
+            int counter = 1;
+
+            //I start form 2nd prime, 1st is 2
+            ulong i = 3;
+            ulong prime = 1;
+            bool isPrime = true;
+            while (counter<numberPrime)
+            {
+                isPrime = true;
+                for (ulong i1 = 3; i1 < i; i1 += 2)
+                {
+                    if (i % i1 == 0)
+                    {
+                        isPrime = false;
+                        break;
+                    }
+                }
+
+                if (isPrime)
+                {
+                    counter++;
+                    Console.WriteLine(counter + " " + i );
+                };
+                i += 2;
+            }
+
+            Console.WriteLine("the "+counter+"st prime= " + (i-2) );
+        }
+
+
+        private static void SumSquadreDifference()
+        {
+            ulong sum1 = 0, sum2 = 0;
+            for (ulong i = 1; i <= 100; i++)
+            {
+                sum1 += i * i;
+                sum2 += i;
+            }
+            Console.WriteLine(sum2 * sum2 - sum1);
+        }
+
+
+        private static void SmallestMultiple()
+        {
+            ulong example = 2*2*2*2 *3*3 *5 *7 *11 *13 *17 *19;
+            Console.WriteLine(example);            
+        }
+
+
+        private static void LargestPalindromeProduct()
+        {
+            string example = "", example1="";
+            int number = 0;
+            int bigger = 0;
+            for (int i = 1; i < 1000; i++)
+            {
+                for (int j = 1; j < 1000; j++)
+                {
+                    number = i * j;
+                    example = number.ToString();
+
+                    example1 = "";
+                    foreach (char item in example)
+                    {
+                        example1 = item + example1;
+                    }
+                    
+                    if (example == example1)
+                    {
+                        if ( int.Parse(example) > bigger )
+                        {
+                            bigger = int.Parse(example);
+                        }
+                    }
+                }
+            }
+
+            Console.WriteLine("largest palindrome product= " + bigger);
+        }
+
 
         private static void LargestPrimeFactor1()
         {
@@ -73,6 +392,7 @@ namespace ProjectEuler
 
             Console.WriteLine("the largest prime factor of the number " + example + "= " + largest);
         }
+
 
         private static void LargestPrimeFactor()
         {
@@ -111,6 +431,7 @@ namespace ProjectEuler
             Console.WriteLine("the largest prime factor of the number " + example + "= " + largest);
         }
 
+
         private static void EvenFibinacciNumbers()
         {
             const int example = 4000000;
@@ -125,6 +446,7 @@ namespace ProjectEuler
             }
             Console.WriteLine("sum of the even-valued terms= " + sum);
         }
+
 
         private static void MultiplesOf3Or5()
         {
